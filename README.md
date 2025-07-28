@@ -31,7 +31,7 @@ medical-appointments-system/
 
 ### 1. Clonar el repositorio
 ```bash
-git clone <repository-url>
+git clone https://github.com/AlfredoMejia3001/sistema-de-citas-medicas.git
 cd medical-appointments-system
 ```
 
