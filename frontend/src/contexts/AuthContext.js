@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useAuth debe ser usado dentro de AuthProvider');
   }
   return context;
 };
@@ -15,36 +15,29 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState(localStorage.getItem('token'));
 
   // Configurar axios con token
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    } else {
-      delete axios.defaults.headers.common['Authorization'];
-    }
-  }, [token]);
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
 
-  // Verificar token al cargar
+  // Verificar si el usuario está autenticado al cargar
   useEffect(() => {
-    const verifyToken = async () => {
-      if (token) {
-        try {
-          const response = await axios.get('/api/auth/me');
-          setUser(response.data.user);
-        } catch (error) {
-          console.error('Token inválido:', error);
-          localStorage.removeItem('token');
-          setToken(null);
-          setUser(null);
-        }
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    
+    if (token && userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
       }
-      setLoading(false);
-    };
-
-    verifyToken();
-  }, [token]);
+    }
+    setLoading(false);
+  }, []);
 
   const login = async (email, password) => {
     try {
@@ -53,18 +46,21 @@ export const AuthProvider = ({ children }) => {
         password
       });
 
-      const { user, token } = response.data;
+      const { token, user: userData } = response.data;
       
+      // Guardar en localStorage
       localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('userRole', userData.role);
       
-      toast.success('¡Bienvenido de vuelta!');
-      return { success: true };
+      // Configurar axios para futuras requests
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      setUser(userData);
+      return userData;
     } catch (error) {
-      const message = error.response?.data?.error || 'Error al iniciar sesión';
-      toast.error(message);
-      return { success: false, error: message };
+      console.error('Error en login:', error);
+      throw error;
     }
   };
 
@@ -72,38 +68,49 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.post('/api/auth/register', userData);
       
-      const { user, token } = response.data;
+      const { token, user: newUser } = response.data;
       
+      // Guardar en localStorage
       localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
+      localStorage.setItem('user', JSON.stringify(newUser));
+      localStorage.setItem('userRole', newUser.role);
       
-      toast.success('¡Registro exitoso! Bienvenido a nuestra plataforma.');
-      return { success: true };
+      // Configurar axios para futuras requests
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      setUser(newUser);
+      return newUser;
     } catch (error) {
-      const message = error.response?.data?.error || 'Error al registrarse';
-      toast.error(message);
-      return { success: false, error: message };
+      console.error('Error en registro:', error);
+      throw error;
     }
   };
 
   const logout = () => {
     localStorage.removeItem('token');
-    setToken(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('userRole');
+    delete axios.defaults.headers.common['Authorization'];
     setUser(null);
     toast.success('Sesión cerrada exitosamente');
   };
 
   const updateProfile = async (profileData) => {
     try {
-      const response = await axios.put('/api/auth/profile', profileData);
-      setUser(response.data.user);
+      const response = await axios.put('/api/auth/profile', profileData, {
+        headers: getAuthHeaders()
+      });
+      
+      const updatedUser = response.data;
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setUser(updatedUser);
+      
       toast.success('Perfil actualizado exitosamente');
-      return { success: true };
+      return updatedUser;
     } catch (error) {
-      const message = error.response?.data?.error || 'Error al actualizar perfil';
-      toast.error(message);
-      return { success: false, error: message };
+      console.error('Error actualizando perfil:', error);
+      toast.error('Error al actualizar perfil');
+      throw error;
     }
   };
 
@@ -112,14 +119,15 @@ export const AuthProvider = ({ children }) => {
       await axios.put('/api/auth/change-password', {
         currentPassword,
         newPassword
+      }, {
+        headers: getAuthHeaders()
       });
       
-      toast.success('Contraseña actualizada exitosamente');
-      return { success: true };
+      toast.success('Contraseña cambiada exitosamente');
     } catch (error) {
-      const message = error.response?.data?.error || 'Error al cambiar contraseña';
-      toast.error(message);
-      return { success: false, error: message };
+      console.error('Error cambiando contraseña:', error);
+      toast.error('Error al cambiar contraseña');
+      throw error;
     }
   };
 
@@ -130,11 +138,7 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     updateProfile,
-    changePassword,
-    isAuthenticated: !!user,
-    isAdmin: user?.role === 'admin',
-    isDoctor: user?.role === 'doctor',
-    isPatient: user?.role === 'patient'
+    changePassword
   };
 
   return (
