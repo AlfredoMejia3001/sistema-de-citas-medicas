@@ -6,7 +6,16 @@ let transporter;
 // Configurar el servicio de email
 const setupEmailService = async () => {
   try {
-    transporter = nodemailer.createTransporter({
+    // Solo configurar email si las credenciales están disponibles
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || 
+        process.env.EMAIL_USER === 'tu_email@gmail.com' || 
+        process.env.EMAIL_PASS === 'tu_app_password_de_gmail') {
+      console.log('⚠️ Servicio de email no configurado - usando valores por defecto');
+      return;
+    }
+
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
       secure: false, // true para 465, false para otros puertos
@@ -25,7 +34,7 @@ const setupEmailService = async () => {
 
   } catch (error) {
     console.error('❌ Error configurando servicio de email:', error);
-    throw error;
+    console.log('⚠️ Continuando sin servicio de email');
   }
 };
 

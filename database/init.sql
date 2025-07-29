@@ -3,16 +3,16 @@
 
 -- Insertar usuario administrador
 INSERT INTO users (name, email, password, role) VALUES 
-('Administrador', 'admin@medical.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'admin')
+('Administrador', 'admin@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'admin')
 ON CONFLICT (email) DO NOTHING;
 
 -- Insertar doctores de ejemplo
 INSERT INTO users (name, email, password, role) VALUES 
-('Dr. María González', 'maria.gonzalez@medical.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'doctor'),
-('Dr. Carlos Rodríguez', 'carlos.rodriguez@medical.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'doctor'),
-('Dr. Ana Martínez', 'ana.martinez@medical.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'doctor'),
-('Dr. Luis Fernández', 'luis.fernandez@medical.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'doctor'),
-('Dr. Carmen López', 'carmen.lopez@medical.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'doctor')
+('Dr. María González', 'maria.gonzalez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Carlos Rodríguez', 'carlos.rodriguez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Ana Martínez', 'ana.martinez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Luis Fernández', 'luis.fernandez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Carmen López', 'carmen.lopez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor')
 ON CONFLICT (email) DO NOTHING;
 
 -- Insertar perfiles de doctores
@@ -26,11 +26,11 @@ ON CONFLICT (user_id) DO NOTHING;
 
 -- Insertar pacientes de ejemplo
 INSERT INTO users (name, email, password, role) VALUES 
-('Juan Pérez', 'juan.perez@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'patient'),
-('María López', 'maria.lopez@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'patient'),
-('Pedro García', 'pedro.garcia@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'patient'),
-('Ana Rodríguez', 'ana.rodriguez@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'patient'),
-('Carlos Martín', 'carlos.martin@email.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQJ3qKGi', 'patient')
+('Juan Pérez', 'juan.perez@email.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'patient'),
+('María López', 'maria.lopez@email.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'patient'),
+('Pedro García', 'pedro.garcia@email.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'patient'),
+('Ana Rodríguez', 'ana.rodriguez@email.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'patient'),
+('Carlos Martín', 'carlos.martin@email.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'patient')
 ON CONFLICT (email) DO NOTHING;
 
 -- Insertar citas de ejemplo

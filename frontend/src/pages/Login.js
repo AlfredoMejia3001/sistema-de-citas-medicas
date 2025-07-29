@@ -170,9 +170,9 @@ const Login = () => {
               Cuentas de Prueba
             </h3>
             <div className="text-xs text-blue-700 space-y-1">
-              <p><strong>Paciente:</strong> juan.perez@email.com / password123</p>
-              <p><strong>Doctor:</strong> maria.gonzalez@medical.com / password123</p>
-              <p><strong>Admin:</strong> admin@medical.com / password123</p>
+              <p><strong>Paciente:</strong> juan.perez@email.com / admin123</p>
+              <p><strong>Doctor:</strong> maria.gonzalez@medical.com / admin123</p>
+              <p><strong>Admin:</strong> admin@medical.com / admin123</p>
             </div>
           </div>
         </div>
