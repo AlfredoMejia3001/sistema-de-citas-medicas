@@ -2,9 +2,9 @@ const express = require('express');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { query } = require('../config/database');
-const { authenticateToken } = require('../middleware/auth');
-const { sendWelcomeEmail } = require('../services/emailService');
+const { query } = require('../../shared/utils/database');
+const { authenticateToken } = require('../../shared/middleware/auth');
+const { sendWelcomeEmail } = require('../../shared/services/emailService');
 const router = express.Router();
 
 // Registro de usuarios

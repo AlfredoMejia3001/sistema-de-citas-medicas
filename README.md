@@ -14,12 +14,36 @@ Una aplicación full stack para programar y gestionar citas médicas con autenti
 ## 📁 Estructura del Proyecto
 
 ```
-medical-appointments-system/
-├── frontend/          # Aplicación React
-├── backend/           # API Node.js/Express
-├── database/          # Scripts de base de datos
-├── docker-compose.yml # Configuración Docker
-└── docs/             # Documentación
+sistema-de-citas-medicas/
+├── frontend/                    # Aplicación React
+│   ├── src/
+│   │   ├── apps/               # Aplicaciones modulares
+│   │   │   ├── auth/           # Autenticación
+│   │   │   ├── patients/       # Gestión de pacientes
+│   │   │   ├── doctors/        # Gestión de doctores
+│   │   │   ├── appointments/   # Gestión de citas
+│   │   │   └── admin/          # Panel de administración
+│   │   ├── shared/             # Componentes y utilidades compartidas
+│   │   │   ├── components/     # Componentes UI reutilizables
+│   │   │   ├── contexts/       # Contextos de React
+│   │   │   └── utils/          # Utilidades y helpers
+│   │   └── App.js              # Componente principal
+│   └── package.json
+├── backend/                     # API Node.js/Express
+│   ├── apps/                   # Aplicaciones modulares
+│   │   ├── auth/               # Autenticación
+│   │   ├── patients/           # Gestión de pacientes
+│   │   ├── doctors/            # Gestión de doctores
+│   │   ├── appointments/       # Gestión de citas
+│   │   └── admin/              # Panel de administración
+│   ├── shared/                 # Utilidades compartidas
+│   │   ├── middleware/         # Middlewares
+│   │   ├── services/           # Servicios (email, etc.)
+│   │   └── utils/              # Utilidades y helpers
+│   └── server.js               # Servidor principal
+├── database/                   # Scripts de base de datos
+├── docker-compose.yml          # Configuración Docker
+└── README.md                   # Documentación
 ```
 
 ## 🛠️ Instalación
@@ -32,7 +56,7 @@ medical-appointments-system/
 ### 1. Clonar el repositorio
 ```bash
 git clone https://github.com/AlfredoMejia3001/sistema-de-citas-medicas.git
-cd medical-appointments-system
+cd sistema-de-citas-medicas
 ```
 
 ### 2. Iniciar la base de datos con Docker
@@ -139,24 +163,32 @@ FRONTEND_URL=http://localhost:3000
 
 ## 📚 API Endpoints
 
-### Autenticación
+### Autenticación (`/api/auth`)
 - `POST /api/auth/register` - Registro de usuarios
 - `POST /api/auth/login` - Login de usuarios
 - `GET /api/auth/me` - Obtener perfil actual
 
-### Doctores
+### Pacientes (`/api/patients`)
+- `GET /api/patients/history/:patientId` - Historial médico del paciente
+- `POST /api/patients/history` - Crear entrada en historial médico
+
+### Doctores (`/api/doctors`)
 - `GET /api/doctors` - Listar todos los doctores
 - `GET /api/doctors/:id` - Obtener doctor específico
 - `POST /api/doctors` - Crear doctor (admin)
 - `PUT /api/doctors/:id` - Actualizar doctor
 - `DELETE /api/doctors/:id` - Eliminar doctor
 
-### Citas
+### Citas (`/api/appointments`)
 - `GET /api/appointments` - Listar citas del usuario
 - `GET /api/appointments/:id` - Obtener cita específica
 - `POST /api/appointments` - Crear nueva cita
 - `PUT /api/appointments/:id` - Actualizar cita
 - `DELETE /api/appointments/:id` - Cancelar cita
+
+### Administración (`/api/admin`)
+- `GET /api/admin/stats` - Estadísticas del sistema
+- `GET /api/admin/users` - Lista de usuarios
 
 ## 🎯 Funcionalidades
 
@@ -166,18 +198,48 @@ FRONTEND_URL=http://localhost:3000
 - Programar citas médicas
 - Ver historial de citas
 - Cancelar citas
+- Gestionar perfil personal
 - Recibir recordatorios por email
 
 ### Para Doctores
-- Panel de administración
+- Panel de administración personal
 - Ver agenda de citas
 - Gestionar disponibilidad
 - Confirmar/cancelar citas
+- Ver historial médico de pacientes
+- Gestionar perfil profesional
 
 ### Para Administradores
 - Gestión completa de doctores
 - Ver todas las citas del sistema
 - Estadísticas y reportes
+- Gestión de usuarios
+- Panel de administración avanzado
+
+## 🏗️ Arquitectura Modular
+
+El proyecto está organizado en una arquitectura modular tipo Django:
+
+### Frontend Apps
+- **`auth/`** - Autenticación y registro
+- **`patients/`** - Gestión de pacientes y perfiles
+- **`doctors/`** - Listado y gestión de doctores
+- **`appointments/`** - Gestión de citas y dashboard
+- **`admin/`** - Panel de administración
+
+### Backend Apps
+- **`auth/`** - Autenticación JWT
+- **`patients/`** - API de pacientes e historial médico
+- **`doctors/`** - API de doctores
+- **`appointments/`** - API de citas
+- **`admin/`** - API de administración
+
+### Shared Components
+- **`middleware/`** - Middlewares de autenticación y validación
+- **`services/`** - Servicios compartidos (email, etc.)
+- **`utils/`** - Utilidades y helpers
+- **`contexts/`** - Contextos de React
+- **`components/`** - Componentes UI reutilizables
 
 ## 🛡️ Seguridad
 

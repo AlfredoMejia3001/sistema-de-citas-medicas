@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../shared/contexts/AuthContext';
 import { 
   Eye, 
   EyeOff, 
@@ -101,12 +101,12 @@ const Register = () => {
 
     if (formData.role === 'doctor') {
       if (!formData.specialty || !formData.licenseNumber || !formData.consultationFee) {
-        toast.error('Por favor completa todos los campos requeridos para doctores');
+        toast.error('Por favor completa todos los campos para doctores');
         return false;
       }
 
       if (!licenseVerified) {
-        toast.error('Debes verificar tu cédula profesional antes de registrarte');
+        toast.error('Por favor verifica tu cédula profesional');
         return false;
       }
     }
@@ -117,14 +117,12 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     try {
       setLoading(true);
       
-      const registrationData = {
+      const registerData = {
         name: formData.name,
         email: formData.email,
         password: formData.password,
@@ -133,39 +131,23 @@ const Register = () => {
         address: formData.address
       };
 
-      // Agregar datos específicos de doctor si es necesario
+      // Agregar campos específicos para doctores
       if (formData.role === 'doctor') {
-        registrationData.specialty = formData.specialty;
-        registrationData.licenseNumber = formData.licenseNumber;
-        registrationData.consultationFee = parseFloat(formData.consultationFee);
+        registerData.specialty = formData.specialty;
+        registerData.licenseNumber = formData.licenseNumber;
+        registerData.consultationFee = parseFloat(formData.consultationFee);
       }
 
-      await register(registrationData);
-      toast.success('¡Registro exitoso! Bienvenido a nuestra plataforma médica');
+      await register(registerData);
+      toast.success('¡Registro exitoso! Bienvenido a nuestro sistema médico');
       navigate('/dashboard');
     } catch (error) {
       console.error('Error en registro:', error);
-      toast.error(error.response?.data?.message || 'Error al registrarse');
+      toast.error(error.response?.data?.message || 'Error al registrar usuario');
     } finally {
       setLoading(false);
     }
   };
-
-  const specialties = [
-    'Cardiología',
-    'Dermatología',
-    'Endocrinología',
-    'Gastroenterología',
-    'Ginecología',
-    'Neurología',
-    'Oftalmología',
-    'Ortopedia',
-    'Pediatría',
-    'Psiquiatría',
-    'Radiología',
-    'Urología',
-    'Otra'
-  ];
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -178,13 +160,13 @@ const Register = () => {
             Crear Cuenta
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Únete a nuestra plataforma médica
+            Únete a nuestro sistema médico
           </p>
         </div>
 
         <div className="card">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Información básica */}
+            {/* Información Personal */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -202,7 +184,7 @@ const Register = () => {
                     value={formData.name}
                     onChange={handleChange}
                     className="input-field pl-10"
-                    placeholder="Dr. Juan Pérez"
+                    placeholder="Juan Pérez"
                   />
                 </div>
               </div>
@@ -219,11 +201,12 @@ const Register = () => {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     required
                     value={formData.email}
                     onChange={handleChange}
                     className="input-field pl-10"
-                    placeholder="tu@email.com"
+                    placeholder="juan@email.com"
                   />
                 </div>
               </div>
@@ -243,6 +226,7 @@ const Register = () => {
                     id="password"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
+                    autoComplete="new-password"
                     required
                     value={formData.password}
                     onChange={handleChange}
@@ -275,6 +259,7 @@ const Register = () => {
                     id="confirmPassword"
                     name="confirmPassword"
                     type={showConfirmPassword ? 'text' : 'password'}
+                    autoComplete="new-password"
                     required
                     value={formData.confirmPassword}
                     onChange={handleChange}
@@ -296,24 +281,29 @@ const Register = () => {
               </div>
             </div>
 
-            {/* Tipo de usuario */}
+            {/* Tipo de Usuario */}
             <div>
               <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-2">
                 Tipo de Usuario *
               </label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-                className="input-field"
-              >
-                <option value="patient">Paciente</option>
-                <option value="doctor">Doctor</option>
-              </select>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Shield className="h-5 w-5 text-gray-400" />
+                </div>
+                <select
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="input-field pl-10"
+                >
+                  <option value="patient">Paciente</option>
+                  <option value="doctor">Doctor</option>
+                </select>
+              </div>
             </div>
 
-            {/* Información de contacto */}
+            {/* Información de Contacto */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
@@ -330,7 +320,7 @@ const Register = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className="input-field pl-10"
-                    placeholder="+34 600 123 456"
+                    placeholder="+52 55 1234 5678"
                   />
                 </div>
               </div>
@@ -350,7 +340,7 @@ const Register = () => {
                     value={formData.address}
                     onChange={handleChange}
                     className="input-field pl-10"
-                    placeholder="Calle Mayor 123, Madrid"
+                    placeholder="Ciudad, Estado"
                   />
                 </div>
               </div>
@@ -358,13 +348,13 @@ const Register = () => {
 
             {/* Campos específicos para doctores */}
             {formData.role === 'doctor' && (
-              <div className="border-t border-gray-200 pt-6">
-                <div className="flex items-center mb-4">
-                  <GraduationCap className="h-5 w-5 text-primary mr-2" />
-                  <h3 className="text-lg font-medium text-gray-900">Información Profesional</h3>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="border-t pt-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                  <GraduationCap className="h-5 w-5 mr-2" />
+                  Información Profesional
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
                     <label htmlFor="specialty" className="block text-sm font-medium text-gray-700 mb-2">
                       Especialidad *
@@ -378,81 +368,75 @@ const Register = () => {
                       required
                     >
                       <option value="">Selecciona una especialidad</option>
-                      {specialties.map(specialty => (
-                        <option key={specialty} value={specialty}>
-                          {specialty}
-                        </option>
-                      ))}
+                      <option value="Cardiología">Cardiología</option>
+                      <option value="Dermatología">Dermatología</option>
+                      <option value="Endocrinología">Endocrinología</option>
+                      <option value="Gastroenterología">Gastroenterología</option>
+                      <option value="Ginecología">Ginecología</option>
+                      <option value="Neurología">Neurología</option>
+                      <option value="Oftalmología">Oftalmología</option>
+                      <option value="Ortopedia">Ortopedia</option>
+                      <option value="Pediatría">Pediatría</option>
+                      <option value="Psiquiatría">Psiquiatría</option>
+                      <option value="Radiología">Radiología</option>
+                      <option value="Urología">Urología</option>
                     </select>
                   </div>
 
                   <div>
-                    <label htmlFor="consultationFee" className="block text-sm font-medium text-gray-700 mb-2">
-                      Tarifa de Consulta (€) *
+                    <label htmlFor="licenseNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                      Cédula Profesional *
                     </label>
-                    <input
-                      id="consultationFee"
-                      name="consultationFee"
-                      type="number"
-                      min="0"
-                      step="0.01"
-                      value={formData.consultationFee}
-                      onChange={handleChange}
-                      className="input-field"
-                      placeholder="80.00"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Verificación de cédula profesional */}
-                <div className="mt-6">
-                  <label htmlFor="licenseNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                    Cédula Profesional *
-                  </label>
-                  <div className="flex space-x-2">
-                    <div className="flex-1 relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Shield className="h-5 w-5 text-gray-400" />
+                    <div className="flex space-x-2">
+                      <div className="relative flex-1">
+                        <input
+                          id="licenseNumber"
+                          name="licenseNumber"
+                          type="text"
+                          value={formData.licenseNumber}
+                          onChange={handleChange}
+                          className="input-field"
+                          placeholder="12345678"
+                          required
+                        />
                       </div>
+                      <button
+                        type="button"
+                        onClick={verifyLicense}
+                        disabled={loading || !formData.licenseNumber}
+                        className="btn-secondary px-4 py-2 text-sm"
+                      >
+                        {loading ? 'Verificando...' : 'Verificar'}
+                      </button>
+                    </div>
+                    {licenseVerified && (
+                      <div className="mt-2 flex items-center text-green-600 text-sm">
+                        <Shield className="h-4 w-4 mr-1" />
+                        Cédula verificada
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="consultationFee" className="block text-sm font-medium text-gray-700 mb-2">
+                      Honorarios por Consulta *
+                    </label>
+                    <div className="relative">
+                      <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">
+                        $
+                      </span>
                       <input
-                        id="licenseNumber"
-                        name="licenseNumber"
-                        type="text"
-                        value={formData.licenseNumber}
+                        id="consultationFee"
+                        name="consultationFee"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value={formData.consultationFee}
                         onChange={handleChange}
-                        className={`input-field pl-10 ${
-                          licenseVerified ? 'border-green-500' : ''
-                        }`}
-                        placeholder="CARD001"
+                        className="input-field pl-8"
+                        placeholder="500.00"
                         required
                       />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={verifyLicense}
-                      disabled={loading || !formData.licenseNumber}
-                      className="btn-secondary px-4 py-2"
-                    >
-                      {loading ? 'Verificando...' : 'Verificar'}
-                    </button>
-                  </div>
-                  
-                  {licenseVerified && (
-                    <div className="mt-2 flex items-center text-green-600">
-                      <Shield className="h-4 w-4 mr-1" />
-                      <span className="text-sm">Cédula profesional verificada</span>
-                    </div>
-                  )}
-                  
-                  <div className="mt-2 text-xs text-gray-500">
-                    <div className="flex items-start">
-                      <AlertTriangle className="h-4 w-4 text-yellow-500 mr-1 mt-0.5" />
-                      <div>
-                        <p className="font-medium text-yellow-700">Verificación de Cédula Profesional</p>
-                        <p>Para garantizar la calidad del servicio, verificamos la autenticidad de las cédulas profesionales. 
-                        En producción, esto se conectará con la base de datos oficial de profesionales médicos.</p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -462,7 +446,7 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                disabled={loading || (formData.role === 'doctor' && !licenseVerified)}
+                disabled={loading}
                 className="btn-primary w-full flex justify-center items-center"
               >
                 {loading ? (

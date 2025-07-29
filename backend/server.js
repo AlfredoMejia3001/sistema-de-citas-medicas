@@ -4,12 +4,16 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth');
-const doctorRoutes = require('./routes/doctors');
-const appointmentRoutes = require('./routes/appointments');
-const medicalHistoryRoutes = require('./routes/medicalHistory');
-const { connectDB } = require('./config/database');
-const { setupEmailService } = require('./services/emailService');
+// Importar apps
+const authApp = require('./apps/auth');
+const patientsApp = require('./apps/patients');
+const doctorsApp = require('./apps/doctors');
+const appointmentsApp = require('./apps/appointments');
+const adminApp = require('./apps/admin');
+
+// Importar utilidades compartidas
+const { connectDB } = require('./shared/utils/database');
+const { setupEmailService } = require('./shared/services/emailService');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,11 +35,12 @@ app.use(limiter);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/doctors', doctorRoutes);
-app.use('/api/appointments', appointmentRoutes);
-app.use('/api/medical-history', medicalHistoryRoutes);
+// Routes - Apps modulares
+app.use('/api', authApp);
+app.use('/api', patientsApp);
+app.use('/api', doctorsApp);
+app.use('/api', appointmentsApp);
+app.use('/api/admin', adminApp);
 
 // Health check
 app.get('/health', (req, res) => {

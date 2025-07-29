@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMedicalHistory } from '../../contexts/MedicalHistoryContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useMedicalHistory } from '../../shared/contexts/MedicalHistoryContext';
+import { useAuth } from '../../shared/contexts/AuthContext';
 import LoadingSpinner from '../ui/LoadingSpinner';
 import { 
     Calendar, 

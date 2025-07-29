@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './contexts/AuthContext';
-import { AppointmentsProvider } from './contexts/AppointmentsContext';
-import { MedicalHistoryProvider } from './contexts/MedicalHistoryContext';
+import { AuthProvider } from './shared/contexts/AuthContext';
+import { AppointmentsProvider } from './shared/contexts/AppointmentsContext';
+import { MedicalHistoryProvider } from './shared/contexts/MedicalHistoryContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import Doctors from './pages/Doctors';
-import Appointments from './pages/Appointments';
-import Profile from './pages/Profile';
-import PatientHistory from './pages/PatientHistory';
+import Login from './apps/auth/Login';
+import Register from './apps/auth/Register';
+import Dashboard from './apps/appointments/Dashboard';
+import Doctors from './apps/doctors/Doctors';
+import Appointments from './apps/appointments/Appointments';
+import Profile from './apps/patients/Profile';
+import PatientHistory from './apps/patients/PatientHistory';
 import NotFound from './pages/NotFound';
 
 // Componente para rutas protegidas

@@ -59,7 +59,7 @@ const sendDailyReminders = async () => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowDate = tomorrow.toISOString().split('T')[0];
 
-    const { query } = require('../config/database');
+    const { query } = require('../utils/database');
     
     const result = await query(`
       SELECT 

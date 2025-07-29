@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const { query } = require('../config/database');
-const { authenticateToken, requireRole } = require('../middleware/auth');
+const { query } = require('../../shared/utils/database');
+const { authenticateToken, requireRole } = require('../../shared/middleware/auth');
 const router = express.Router();
 
 // ===== HISTORIAL MÉDICO =====

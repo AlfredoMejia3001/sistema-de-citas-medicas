@@ -1,8 +1,8 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const { query } = require('../config/database');
-const { authenticateToken, requireOwnershipOrAdmin } = require('../middleware/auth');
-const { sendAppointmentConfirmation, sendAppointmentReminder, sendCancellationEmail } = require('../services/emailService');
+const { query } = require('../../shared/utils/database');
+const { authenticateToken, requireOwnershipOrAdmin } = require('../../shared/middleware/auth');
+const { sendAppointmentConfirmation, sendAppointmentReminder, sendCancellationEmail } = require('../../shared/services/emailService');
 
 const router = express.Router();
 
@@ -37,7 +37,7 @@ router.get('/', authenticateToken, async (req, res) => {
           doc.specialty, doc.consultation_fee, doc.phone as doctor_phone
         FROM appointments a
         JOIN users d ON a.doctor_id = d.id
-        JOIN doctors doc ON a.doctor_id = doc.user_id
+        JOIN doctors doc ON d.id = doc.user_id
         WHERE a.patient_id = $1
         ORDER BY a.appointment_date DESC, a.appointment_time ASC
       `;
@@ -70,7 +70,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
       FROM appointments a
       JOIN users p ON a.patient_id = p.id
       JOIN users d ON a.doctor_id = d.id
-      JOIN doctors doc ON a.doctor_id = doc.user_id
+      JOIN doctors doc ON d.id = doc.user_id
       WHERE a.id = $1
     `, [id]);
 
