@@ -1,146 +1,185 @@
-# Sistema de Gestión de Citas Médicas
+# 🏥 Sistema de Citas Médicas
 
-Una aplicación full stack para programar y gestionar citas médicas con autenticación JWT y notificaciones por email.
+Un sistema completo de gestión de citas médicas desarrollado con **React** (frontend) y **Node.js** (backend), con base de datos **PostgreSQL** y contenedores **Docker**.
 
-## 🚀 Características
+## 📋 Descripción
 
-- **Frontend**: React con interfaz moderna y responsive
-- **Backend**: Node.js con Express y API REST
-- **Base de datos**: PostgreSQL en Docker para fácil setup
-- **Autenticación**: JWT para pacientes y doctores
-- **Notificaciones**: Envío de recordatorios por email con Nodemailer
-- **Gestión completa**: Crear, listar, actualizar y eliminar citas
+Este sistema permite la gestión integral de citas médicas entre pacientes y doctores, incluyendo:
 
-## 📁 Estructura del Proyecto
+- **Registro y autenticación** de usuarios (pacientes y doctores)
+- **Gestión de citas** con programación, confirmación y cancelación
+- **Historial médico** completo de pacientes
+- **Seguimientos médicos** y recordatorios
+- **Documentos médicos** (prescripciones, reportes, etc.)
+- **Panel de administración** para gestión del sistema
+- **Notificaciones por email** automáticas
 
-```
-sistema-de-citas-medicas/
-├── frontend/                    # Aplicación React
-│   ├── src/
-│   │   ├── apps/               # Aplicaciones modulares
-│   │   │   ├── auth/           # Autenticación
-│   │   │   ├── patients/       # Gestión de pacientes
-│   │   │   ├── doctors/        # Gestión de doctores
-│   │   │   ├── appointments/   # Gestión de citas
-│   │   │   └── admin/          # Panel de administración
-│   │   ├── shared/             # Componentes y utilidades compartidas
-│   │   │   ├── components/     # Componentes UI reutilizables
-│   │   │   ├── contexts/       # Contextos de React
-│   │   │   └── utils/          # Utilidades y helpers
-│   │   └── App.js              # Componente principal
-│   └── package.json
-├── backend/                     # API Node.js/Express
-│   ├── apps/                   # Aplicaciones modulares
-│   │   ├── auth/               # Autenticación
-│   │   ├── patients/           # Gestión de pacientes
-│   │   ├── doctors/            # Gestión de doctores
-│   │   ├── appointments/       # Gestión de citas
-│   │   └── admin/              # Panel de administración
-│   ├── shared/                 # Utilidades compartidas
-│   │   ├── middleware/         # Middlewares
-│   │   ├── services/           # Servicios (email, etc.)
-│   │   └── utils/              # Utilidades y helpers
-│   └── server.js               # Servidor principal
-├── database/                   # Scripts de base de datos
-├── docker-compose.yml          # Configuración Docker
-└── README.md                   # Documentación
-```
+## 🏗️ Arquitectura del Sistema
 
-## 🛠️ Instalación
+### Frontend (React)
+- **React 18** con hooks y context API
+- **React Router** para navegación
+- **Tailwind CSS** para estilos
+- **Axios** para comunicación con API
+- **React Hook Form** para formularios
+- **Lucide React** para iconos
+- **React Hot Toast** para notificaciones
+
+### Backend (Node.js)
+- **Express.js** como framework web
+- **JWT** para autenticación
+- **bcryptjs** para encriptación de contraseñas
+- **express-validator** para validación de datos
+- **nodemailer** para envío de emails
+- **multer** para manejo de archivos
+- **node-cron** para tareas programadas
+
+### Base de Datos
+- **PostgreSQL** como base de datos principal
+- **Docker** para contenerización
+- **pgAdmin** para administración de BD
+
+### Infraestructura
+- **Docker Compose** para orquestación de servicios
+- **Concurrently** para ejecutar frontend y backend simultáneamente
+
+## 🗄️ Estructura de la Base de Datos
+
+### Tablas Principales
+- **users**: Información básica de usuarios (pacientes, doctores, admin)
+- **doctors**: Perfiles específicos de doctores (especialidad, licencia, tarifas)
+- **appointments**: Citas médicas programadas
+- **patient_medical_history**: Historial médico completo
+- **medical_follow_ups**: Seguimientos médicos
+- **medical_documents**: Documentos médicos (prescripciones, reportes)
+- **patient_conditions**: Alergias y condiciones médicas
+
+### Características de la BD
+- **Triggers automáticos** para actualización de timestamps
+- **Índices optimizados** para consultas frecuentes
+- **Vistas predefinidas** para reportes comunes
+- **Restricciones de integridad** referencial
+
+## 🚀 Funcionalidades Principales
+
+### Para Pacientes
+- ✅ Registro y login seguro
+- ✅ Buscar doctores por especialidad
+- ✅ Programar citas médicas
+- ✅ Ver historial médico personal
+- ✅ Recibir notificaciones por email
+- ✅ Gestionar perfil personal
+
+### Para Doctores
+- ✅ Registro con validación de licencia
+- ✅ Configurar horarios disponibles
+- ✅ Gestionar citas programadas
+- ✅ Registrar historial médico de pacientes
+- ✅ Crear seguimientos médicos
+- ✅ Subir documentos médicos
+
+### Para Administradores
+- ✅ Panel de administración completo
+- ✅ Gestión de usuarios y doctores
+- ✅ Reportes y estadísticas
+- ✅ Configuración del sistema
+
+## 🛠️ Instalación y Configuración
 
 ### Prerrequisitos
 - Node.js (v16 o superior)
 - Docker y Docker Compose
 - Git
 
-### 1. Clonar el repositorio
+### Instalación Rápida
 ```bash
-git clone https://github.com/AlfredoMejia3001/sistema-de-citas-medicas.git
+# Clonar el repositorio
+git clone <repository-url>
 cd sistema-de-citas-medicas
-```
 
-### 2. Iniciar la base de datos con Docker
-```bash
-# Iniciar PostgreSQL y pgAdmin
-docker-compose up -d
+# Configurar todo automáticamente
+npm run setup
 
-# Verificar que los contenedores estén corriendo
-docker-compose ps
-```
-
-### 3. Instalar dependencias
-```bash
-npm run install:all
-```
-
-### 4. Configurar variables de entorno
-```bash
-# Copiar archivo de ejemplo
-cp backend/env.example backend/.env
-
-# Editar las variables según tu configuración
-# Las credenciales de la base de datos ya están configuradas para Docker
-```
-
-### 5. Ejecutar en desarrollo
-```bash
+# Iniciar el sistema
 npm run dev
 ```
 
-## 🐳 Docker Setup
-
-### Iniciar servicios
+### Instalación Manual
 ```bash
-# Iniciar solo la base de datos
-docker-compose up -d postgres
+# 1. Levantar servicios de Docker
+npm run docker:up
 
-# Iniciar base de datos + pgAdmin
-docker-compose up -d
+# 2. Instalar dependencias
+npm run install:all
+
+# 3. Iniciar desarrollo
+npm run dev
 ```
 
-### Acceder a pgAdmin
-- URL: http://localhost:5050
-- Email: admin@medical.com
-- Password: admin123
+## 📁 Estructura del Proyecto
 
-### Configurar conexión en pgAdmin
-1. Click derecho en "Servers" → "Register" → "Server"
-2. General tab:
-   - Name: Medical Appointments
-3. Connection tab:
-   - Host: postgres
-   - Port: 5432
-   - Database: medical_appointments
-   - Username: postgres
-   - Password: postgres123
-
-### Comandos útiles
-```bash
-# Ver logs de la base de datos
-docker-compose logs postgres
-
-# Reiniciar solo la base de datos
-docker-compose restart postgres
-
-# Detener todos los servicios
-docker-compose down
-
-# Eliminar volúmenes (cuidado: borra todos los datos)
-docker-compose down -v
+```
+sistema-de-citas-medicas/
+├── backend/                 # API Node.js
+│   ├── apps/               # Módulos de la aplicación
+│   │   ├── auth/          # Autenticación
+│   │   ├── appointments/  # Gestión de citas
+│   │   ├── doctors/       # Gestión de doctores
+│   │   ├── patients/      # Gestión de pacientes
+│   │   └── admin/         # Panel administrativo
+│   ├── shared/            # Utilidades compartidas
+│   │   ├── middleware/    # Middlewares
+│   │   ├── services/      # Servicios (email, etc.)
+│   │   └── utils/         # Utilidades
+│   └── server.js          # Servidor principal
+├── frontend/              # Aplicación React
+│   ├── src/
+│   │   ├── apps/         # Módulos de la aplicación
+│   │   ├── components/   # Componentes reutilizables
+│   │   ├── contexts/     # Contextos de React
+│   │   └── pages/        # Páginas principales
+│   └── public/           # Archivos estáticos
+├── database/             # Scripts de base de datos
+│   ├── schema.sql       # Esquema de la BD
+│   └── init.sql         # Datos iniciales
+└── docker-compose.yml   # Configuración de Docker
 ```
 
-## 🔧 Configuración
+## 🔧 Scripts Disponibles
 
-### Variables de Entorno (Backend)
+```bash
+# Desarrollo
+npm run dev              # Iniciar frontend y backend
+npm run dev:backend      # Solo backend
+npm run dev:frontend     # Solo frontend
 
-Crea un archivo `.env` en la carpeta `backend/`:
+# Docker
+npm run docker:up        # Levantar contenedores
+npm run docker:down      # Detener contenedores
+npm run docker:logs      # Ver logs
+npm run docker:restart   # Reiniciar contenedores
+
+# Base de datos
+npm run db:reset         # Resetear BD completamente
+
+# Producción
+npm run build            # Construir frontend
+npm run start            # Iniciar solo backend
+```
+
+## 🌐 Puertos y URLs
+
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:5000
+- **PostgreSQL**: localhost:5433
+- **pgAdmin**: http://localhost:5050
+
+## 🔐 Variables de Entorno
+
+Crear archivo `.env` en el directorio `backend/`:
 
 ```env
-# Servidor
-PORT=5000
-NODE_ENV=development
-
-# Base de datos PostgreSQL (Docker)
+# Base de datos
 DB_HOST=localhost
 DB_PORT=5433
 DB_NAME=medical_appointments
@@ -148,140 +187,104 @@ DB_USER=postgres
 DB_PASSWORD=postgres123
 
 # JWT
-JWT_SECRET=tu_jwt_secret_super_seguro_cambiar_en_produccion
+JWT_SECRET=tu_secreto_jwt_super_seguro
 JWT_EXPIRES_IN=24h
 
-# Email (Gmail)
+# Email
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
 EMAIL_USER=tu_email@gmail.com
-EMAIL_PASS=tu_app_password_de_gmail
+EMAIL_PASS=tu_password_de_aplicacion
 
-# Frontend URL para CORS
-FRONTEND_URL=http://localhost:3000
+# Servidor
+PORT=5000
+NODE_ENV=development
 ```
 
-## 📚 API Endpoints
+## 📊 Características Técnicas
 
-### Autenticación (`/api/auth`)
+### Seguridad
+- ✅ Autenticación JWT
+- ✅ Encriptación de contraseñas (bcrypt)
+- ✅ Validación de datos en frontend y backend
+- ✅ Rate limiting para APIs
+- ✅ Headers de seguridad (Helmet)
+
+### Rendimiento
+- ✅ Índices optimizados en BD
+- ✅ Paginación en consultas
+- ✅ Caché de consultas frecuentes
+- ✅ Compresión de respuestas
+
+### Escalabilidad
+- ✅ Arquitectura modular
+- ✅ Separación de responsabilidades
+- ✅ APIs RESTful
+- ✅ Contenedores Docker
+
+## 🧪 Testing
+
+```bash
+# Backend tests
+cd backend && npm test
+
+# Frontend tests
+cd frontend && npm test
+```
+
+## 📝 API Endpoints
+
+### Autenticación
 - `POST /api/auth/register` - Registro de usuarios
 - `POST /api/auth/login` - Login de usuarios
-- `GET /api/auth/me` - Obtener perfil actual
+- `GET /api/auth/profile` - Obtener perfil
+- `PUT /api/auth/profile` - Actualizar perfil
+- `PUT /api/auth/change-password` - Cambiar contraseña
 
-### Pacientes (`/api/patients`)
-- `GET /api/patients/history/:patientId` - Historial médico del paciente
-- `POST /api/patients/history` - Crear entrada en historial médico
-
-### Doctores (`/api/doctors`)
-- `GET /api/doctors` - Listar todos los doctores
-- `GET /api/doctors/:id` - Obtener doctor específico
-- `POST /api/doctors` - Crear doctor (admin)
-- `PUT /api/doctors/:id` - Actualizar doctor
-- `DELETE /api/doctors/:id` - Eliminar doctor
-
-### Citas (`/api/appointments`)
-- `GET /api/appointments` - Listar citas del usuario
-- `GET /api/appointments/:id` - Obtener cita específica
-- `POST /api/appointments` - Crear nueva cita
+### Citas
+- `GET /api/appointments` - Listar citas
+- `POST /api/appointments` - Crear cita
 - `PUT /api/appointments/:id` - Actualizar cita
 - `DELETE /api/appointments/:id` - Cancelar cita
 
-### Administración (`/api/admin`)
-- `GET /api/admin/stats` - Estadísticas del sistema
-- `GET /api/admin/users` - Lista de usuarios
+### Doctores
+- `GET /api/doctors` - Listar doctores
+- `GET /api/doctors/:id` - Obtener doctor
+- `PUT /api/doctors/:id` - Actualizar doctor
 
-## 🎯 Funcionalidades
+### Pacientes
+- `GET /api/patients/history` - Historial médico
+- `POST /api/patients/history` - Agregar entrada al historial
 
-### Para Pacientes
-- Registro e inicio de sesión
-- Ver lista de doctores disponibles
-- Programar citas médicas
-- Ver historial de citas
-- Cancelar citas
-- Gestionar perfil personal
-- Recibir recordatorios por email
-
-### Para Doctores
-- Panel de administración personal
-- Ver agenda de citas
-- Gestionar disponibilidad
-- Confirmar/cancelar citas
-- Ver historial médico de pacientes
-- Gestionar perfil profesional
-
-### Para Administradores
-- Gestión completa de doctores
-- Ver todas las citas del sistema
-- Estadísticas y reportes
-- Gestión de usuarios
-- Panel de administración avanzado
-
-## 🏗️ Arquitectura Modular
-
-El proyecto está organizado en una arquitectura modular tipo Django:
-
-### Frontend Apps
-- **`auth/`** - Autenticación y registro
-- **`patients/`** - Gestión de pacientes y perfiles
-- **`doctors/`** - Listado y gestión de doctores
-- **`appointments/`** - Gestión de citas y dashboard
-- **`admin/`** - Panel de administración
-
-### Backend Apps
-- **`auth/`** - Autenticación JWT
-- **`patients/`** - API de pacientes e historial médico
-- **`doctors/`** - API de doctores
-- **`appointments/`** - API de citas
-- **`admin/`** - API de administración
-
-### Shared Components
-- **`middleware/`** - Middlewares de autenticación y validación
-- **`services/`** - Servicios compartidos (email, etc.)
-- **`utils/`** - Utilidades y helpers
-- **`contexts/`** - Contextos de React
-- **`components/`** - Componentes UI reutilizables
-
-## 🛡️ Seguridad
-
-- Autenticación JWT
-- Validación de datos
-- Sanitización de inputs
-- Rate limiting
-- CORS configurado
-
-## 📧 Notificaciones
-
-El sistema envía automáticamente:
-- Confirmación de cita al programarla
-- Recordatorio 24h antes de la cita
-- Notificación de cancelación
-
-## 🚀 Despliegue
-
-### Frontend (Vercel/Netlify)
-```bash
-cd frontend
-npm run build
-```
-
-### Backend (Heroku/Railway)
-```bash
-cd backend
-npm start
-```
-
-### Base de datos en producción
-- Usar PostgreSQL en la nube (Heroku Postgres, AWS RDS, etc.)
-- Actualizar variables de entorno con las credenciales de producción
-
-## 🤝 Contribuir
+## 🤝 Contribución
 
 1. Fork el proyecto
-2. Crear una rama para tu feature
-3. Commit tus cambios
-4. Push a la rama
+2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abrir un Pull Request
 
 ## 📄 Licencia
 
-MIT License - ver [LICENSE](LICENSE) para detalles. 
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles.
+
+## 👥 Autores
+
+- **Tu Nombre** - *Desarrollo inicial* - [TuUsuario](https://github.com/TuUsuario)
+
+## 🙏 Agradecimientos
+
+- React y Node.js communities
+- Tailwind CSS por los estilos
+- PostgreSQL por la base de datos robusta
+- Docker por la contenerización
+
+---
+
+## 🚀 Estado del Proyecto
+
+✅ **Completado**: Sistema básico funcional
+🔄 **En desarrollo**: Mejoras de UI/UX
+📋 **Pendiente**: Tests unitarios y de integración
+
+**Última actualización**: Agosto 2024 
