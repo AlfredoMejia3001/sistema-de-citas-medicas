@@ -16,7 +16,7 @@ const authenticateToken = async (req, res, next) => {
     // Obtener información actualizada del usuario
     const result = await query(
       'SELECT id, email, name, role, created_at FROM users WHERE id = $1',
-      [decoded.userId]
+      [decoded.id]
     );
 
     if (result.rows.length === 0) {

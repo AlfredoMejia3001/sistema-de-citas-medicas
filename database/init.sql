@@ -12,7 +12,12 @@ INSERT INTO users (name, email, password, role) VALUES
 ('Dr. Carlos Rodríguez', 'carlos.rodriguez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
 ('Dr. Ana Martínez', 'ana.martinez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
 ('Dr. Luis Fernández', 'luis.fernandez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
-('Dr. Carmen López', 'carmen.lopez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor')
+('Dr. Carmen López', 'carmen.lopez@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Roberto Silva', 'roberto.silva@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Patricia Morales', 'patricia.morales@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Javier Ruiz', 'javier.ruiz@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Isabel Vargas', 'isabel.vargas@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor'),
+('Dr. Manuel Torres', 'manuel.torres@medical.com', '$2a$12$MPjuVCWOuiI.HyEGIHUwj.kw9TFgO.CiIHJLrTJR7hxyaXeYFzLh2', 'doctor')
 ON CONFLICT (email) DO NOTHING;
 
 -- Insertar perfiles de doctores
@@ -21,7 +26,12 @@ INSERT INTO doctors (user_id, specialty, license_number, phone, address, consult
 ((SELECT id FROM users WHERE email = 'carlos.rodriguez@medical.com'), 'Dermatología', 'DERM001', '+34 600 234 567', 'Avenida Principal 456, Barcelona', 70.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]'),
 ((SELECT id FROM users WHERE email = 'ana.martinez@medical.com'), 'Pediatría', 'PEDI001', '+34 600 345 678', 'Plaza Central 789, Valencia', 60.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
 ((SELECT id FROM users WHERE email = 'luis.fernandez@medical.com'), 'Ortopedia', 'ORTO001', '+34 600 456 789', 'Calle San Martín 321, Sevilla', 75.00, '["08:00", "09:00", "10:00", "11:00", "16:00", "17:00", "18:00"]'),
-((SELECT id FROM users WHERE email = 'carmen.lopez@medical.com'), 'Ginecología', 'GINE001', '+34 600 567 890', 'Avenida de la Paz 654, Bilbao', 85.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]')
+((SELECT id FROM users WHERE email = 'carmen.lopez@medical.com'), 'Ginecología', 'GINE001', '+34 600 567 890', 'Avenida de la Paz 654, Bilbao', 85.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'roberto.silva@medical.com'), 'Neurología', 'NEUR001', '+34 600 678 901', 'Calle del Sol 147, Málaga', 90.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'patricia.morales@medical.com'), 'Psicología', 'PSIC001', '+34 600 789 012', 'Avenida de la Libertad 258, Zaragoza', 65.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
+((SELECT id FROM users WHERE email = 'javier.ruiz@medical.com'), 'Oftalmología', 'OFT001', '+34 600 890 123', 'Plaza de España 369, Granada', 75.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'isabel.vargas@medical.com'), 'Endocrinología', 'ENDO001', '+34 600 901 234', 'Calle Real 741, Córdoba', 80.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
+((SELECT id FROM users WHERE email = 'manuel.torres@medical.com'), 'Urología', 'URO001', '+34 600 012 345', 'Avenida de la Constitución 852, Alicante', 85.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]')
 ON CONFLICT (user_id) DO NOTHING;
 
 -- Insertar pacientes de ejemplo

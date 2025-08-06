@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Filter, MapPin, Phone, Clock, Calendar, User } from 'lucide-react';
 import { useAuth } from '../../shared/contexts/AuthContext';
 import { useAppointments } from '../../shared/contexts/AppointmentsContext';
+import api from '../../shared/utils/axiosConfig';
 
 const Doctors = () => {
   const { user } = useAuth();
@@ -49,21 +50,15 @@ const Doctors = () => {
 
   const fetchDoctors = async () => {
     try {
-      const response = await fetch('/api/doctors', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setDoctors(data.doctors);
-        setFilteredDoctors(data.doctors);
-      } else {
-        console.error('Error fetching doctors');
-      }
+      console.log('🔍 Solicitando doctores...');
+      const response = await api.get('/api/doctors');
+      console.log('✅ Respuesta recibida:', response.data);
+      setDoctors(response.data.doctors);
+      setFilteredDoctors(response.data.doctors);
+      console.log(`📋 Doctores cargados: ${response.data.doctors.length}`);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('❌ Error fetching doctors:', error);
+      console.error('❌ Error details:', error.response?.data);
     } finally {
       setLoading(false);
     }
@@ -127,6 +122,29 @@ const Doctors = () => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Cargando doctores...</p>
+          <p className="mt-2 text-sm text-gray-500">Debug: {doctors.length} doctores cargados</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Mostrar mensaje si no hay doctores
+  if (doctors.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Doctores Disponibles
+          </h1>
+          <p className="text-gray-600 mb-4">
+            No se encontraron doctores disponibles
+          </p>
+          <button 
+            onClick={fetchDoctors}
+            className="btn-primary"
+          >
+            Reintentar
+          </button>
         </div>
       </div>
     );
@@ -182,6 +200,9 @@ const Doctors = () => {
           <div className="flex items-center justify-end">
             <span className="text-sm text-gray-600">
               {filteredDoctors.length} doctor{filteredDoctors.length !== 1 ? 'es' : ''} encontrado{filteredDoctors.length !== 1 ? 's' : ''}
+            </span>
+            <span className="text-xs text-gray-400 ml-2">
+              (Total: {doctors.length})
             </span>
           </div>
         </div>

@@ -12,7 +12,6 @@ import {
   CheckCircle, 
   XCircle, 
   Eye,
-  Plus,
   AlertCircle
 } from 'lucide-react';
 
@@ -33,7 +32,6 @@ const Appointments = () => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [showCreateModal, setShowCreateModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // Estados para formularios
@@ -41,13 +39,6 @@ const Appointments = () => {
     appointment_date: '',
     appointment_time: '',
     status: '',
-    notes: ''
-  });
-
-  const [createForm, setCreateForm] = useState({
-    doctor_id: '',
-    appointment_date: '',
-    appointment_time: '',
     notes: ''
   });
 
@@ -161,30 +152,7 @@ const Appointments = () => {
     }
   };
 
-  const handleCreateAppointment = async () => {
-    if (!createForm.doctor_id || !createForm.appointment_date || !createForm.appointment_time) {
-      alert('Por favor completa todos los campos requeridos');
-      return;
-    }
 
-    setLoading(true);
-    try {
-      await createAppointment(createForm);
-      setShowCreateModal(false);
-      setCreateForm({
-        doctor_id: '',
-        appointment_date: '',
-        appointment_time: '',
-        notes: ''
-      });
-      alert('Cita creada exitosamente');
-    } catch (error) {
-      console.error('Error creating appointment:', error);
-      alert('Error al crear la cita');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const formatDate = (dateString) => {
     if (!dateString) return 'No disponible';
@@ -243,13 +211,7 @@ const Appointments = () => {
               Gestiona y revisa todas tus citas médicas
             </p>
           </div>
-          <button
-            onClick={() => setShowCreateModal(true)}
-            className="btn-primary flex items-center"
-          >
-            <Plus className="h-4 w-4 mr-2" />
-            Nueva Cita
-          </button>
+
         </div>
       </div>
 
@@ -515,83 +477,7 @@ const Appointments = () => {
         </div>
       )}
 
-      {/* Modal de Creación */}
-      {showCreateModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-md w-full p-6">
-            <h3 className="text-lg font-semibold mb-4">Nueva Cita</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Doctor
-                </label>
-                <select
-                  value={createForm.doctor_id}
-                  onChange={(e) => setCreateForm({...createForm, doctor_id: e.target.value})}
-                  className="input-field"
-                >
-                  <option value="">Selecciona un doctor</option>
-                  {doctors.map(doctor => (
-                    <option key={doctor.id} value={doctor.id}>
-                      {doctor.name} - {doctor.specialty}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Fecha
-                </label>
-                <input
-                  type="date"
-                  value={createForm.appointment_date}
-                  onChange={(e) => setCreateForm({...createForm, appointment_date: e.target.value})}
-                  className="input-field"
-                  min={new Date().toISOString().split('T')[0]}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Hora
-                </label>
-                <input
-                  type="time"
-                  value={createForm.appointment_time}
-                  onChange={(e) => setCreateForm({...createForm, appointment_time: e.target.value})}
-                  className="input-field"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Notas
-                </label>
-                <textarea
-                  value={createForm.notes}
-                  onChange={(e) => setCreateForm({...createForm, notes: e.target.value})}
-                  className="input-field"
-                  rows="3"
-                  placeholder="Notas adicionales..."
-                />
-              </div>
-            </div>
-            <div className="flex space-x-3 mt-6">
-              <button
-                onClick={handleCreateAppointment}
-                disabled={loading}
-                className="flex-1 btn-primary"
-              >
-                {loading ? 'Creando...' : 'Crear Cita'}
-              </button>
-              <button
-                onClick={() => setShowCreateModal(false)}
-                className="flex-1 btn-secondary"
-              >
-                Cancelar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 };

@@ -356,8 +356,7 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 
 // Obtener estadísticas de citas (solo admin y doctores)
 router.get('/stats/overview', [
-  authenticateToken,
-  requireOwnershipOrAdmin('appointments')
+  authenticateToken
 ], async (req, res) => {
   try {
     let statsQuery;

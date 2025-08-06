@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './shared/contexts/AuthContext';
+import { AuthProvider, useAuth } from './shared/contexts/AuthContext';
 import { AppointmentsProvider } from './shared/contexts/AppointmentsContext';
 import { MedicalHistoryProvider } from './shared/contexts/MedicalHistoryContext';
 import Navbar from './components/layout/Navbar';
@@ -18,14 +18,21 @@ import NotFound from './pages/NotFound';
 
 // Componente para rutas protegidas
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
-  const token = localStorage.getItem('token');
-  const userRole = localStorage.getItem('userRole');
+  const { user, loading } = useAuth();
 
-  if (!token) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  if (allowedRoles.length > 0 && !allowedRoles.includes(userRole)) {
+  if (allowedRoles.length > 0 && !allowedRoles.includes(user.role)) {
     return <Navigate to="/dashboard" replace />;
   }
 
@@ -34,9 +41,17 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
 
 // Componente para rutas públicas (solo si no está autenticado)
 const PublicRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
+  const { user, loading } = useAuth();
 
-  if (token) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (user) {
     return <Navigate to="/dashboard" replace />;
   }
 

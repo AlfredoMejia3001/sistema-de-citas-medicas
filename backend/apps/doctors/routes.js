@@ -5,9 +5,11 @@ const { authenticateToken, requireRole } = require('../../shared/middleware/auth
 
 const router = express.Router();
 
-// Obtener todos los doctores
+// Obtener todos los doctores (público - no requiere autenticación)
 router.get('/', async (req, res) => {
   try {
+    console.log('🔍 Consultando doctores...');
+    
     const result = await query(`
       SELECT 
         u.id, u.name, u.email, u.created_at,
@@ -19,11 +21,14 @@ router.get('/', async (req, res) => {
       ORDER BY u.name
     `);
 
+    console.log(`✅ Doctores encontrados: ${result.rows.length}`);
+    console.log('📋 Doctores:', result.rows.map(d => ({ id: d.id, name: d.name, specialty: d.specialty })));
+
     res.json({
       doctors: result.rows
     });
   } catch (error) {
-    console.error('Error obteniendo doctores:', error);
+    console.error('❌ Error obteniendo doctores:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });

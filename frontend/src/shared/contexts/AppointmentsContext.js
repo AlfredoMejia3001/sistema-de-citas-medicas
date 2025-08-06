@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../utils/axiosConfig';
 import toast from 'react-hot-toast';
 import { useAuth } from './AuthContext';
-
 const AppointmentsContext = createContext();
 
 export const useAppointments = () => {
@@ -26,11 +25,14 @@ export const AppointmentsProvider = ({ children }) => {
     
     setLoading(true);
     try {
-      const response = await axios.get('/api/appointments');
+      const response = await api.get('/api/appointments');
       setAppointments(response.data.appointments);
     } catch (error) {
       console.error('Error cargando citas:', error);
-      toast.error('Error al cargar las citas');
+      // Solo mostrar error si no es un error de red o servidor
+      if (error.response && error.response.status !== 404) {
+        toast.error('Error al cargar las citas');
+      }
     } finally {
       setLoading(false);
     }
@@ -39,7 +41,7 @@ export const AppointmentsProvider = ({ children }) => {
   // Cargar doctores
   const loadDoctors = async () => {
     try {
-      const response = await axios.get('/api/doctors');
+      const response = await api.get('/api/doctors');
       setDoctors(response.data.doctors);
     } catch (error) {
       console.error('Error cargando doctores:', error);
@@ -52,7 +54,7 @@ export const AppointmentsProvider = ({ children }) => {
     if (!user) return;
     
     try {
-      const response = await axios.get('/api/appointments/stats/overview');
+      const response = await api.get('/api/appointments/stats/overview');
       setStats(response.data.stats);
     } catch (error) {
       console.error('Error cargando estadísticas:', error);
@@ -62,7 +64,7 @@ export const AppointmentsProvider = ({ children }) => {
   // Crear nueva cita
   const createAppointment = async (appointmentData) => {
     try {
-      const response = await axios.post('/api/appointments', appointmentData);
+      const response = await api.post('/api/appointments', appointmentData);
       
       // Agregar la nueva cita a la lista
       setAppointments(prev => [response.data.appointment, ...prev]);
@@ -79,7 +81,7 @@ export const AppointmentsProvider = ({ children }) => {
   // Actualizar cita
   const updateAppointment = async (id, updateData) => {
     try {
-      const response = await axios.put(`/api/appointments/${id}`, updateData);
+      const response = await api.put(`/api/appointments/${id}`, updateData);
       
       // Actualizar la cita en la lista
       setAppointments(prev => 
@@ -100,7 +102,7 @@ export const AppointmentsProvider = ({ children }) => {
   // Cancelar cita
   const cancelAppointment = async (id) => {
     try {
-      await axios.delete(`/api/appointments/${id}`);
+      await api.delete(`/api/appointments/${id}`);
       
       // Actualizar el estado de la cita en la lista
       setAppointments(prev => 
@@ -123,7 +125,7 @@ export const AppointmentsProvider = ({ children }) => {
   // Obtener disponibilidad de un doctor
   const getDoctorAvailability = async (doctorId, date) => {
     try {
-      const response = await axios.get(`/api/doctors/${doctorId}/availability`, {
+      const response = await api.get(`/api/doctors/${doctorId}/availability`, {
         params: { date }
       });
       return response.data;
@@ -137,7 +139,7 @@ export const AppointmentsProvider = ({ children }) => {
   // Obtener cita específica
   const getAppointment = async (id) => {
     try {
-      const response = await axios.get(`/api/appointments/${id}`);
+      const response = await api.get(`/api/appointments/${id}`);
       return response.data.appointment;
     } catch (error) {
       console.error('Error obteniendo cita:', error);
