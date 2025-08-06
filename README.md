@@ -20,7 +20,7 @@ Este sistema permite la gestión integral de citas médicas entre pacientes y do
 - **React 18** con hooks y context API
 - **React Router** para navegación
 - **Tailwind CSS** para estilos
-- **Axios** para comunicación con API
+- **Axios** para comunicación con API (configurado con interceptores)
 - **React Hook Form** para formularios
 - **Lucide React** para iconos
 - **React Hot Toast** para notificaciones
@@ -60,15 +60,37 @@ Este sistema permite la gestión integral de citas médicas entre pacientes y do
 - **Vistas predefinidas** para reportes comunes
 - **Restricciones de integridad** referencial
 
+## 👨‍⚕️ Doctores Disponibles
+
+El sistema incluye **10 doctores** con diferentes especialidades:
+
+### Doctores Originales
+1. **Dr. María González** - Cardiología (€80.00)
+2. **Dr. Carlos Rodríguez** - Dermatología (€70.00)
+3. **Dr. Ana Martínez** - Pediatría (€60.00)
+4. **Dr. Luis Fernández** - Ortopedia (€75.00)
+5. **Dr. Carmen López** - Ginecología (€85.00)
+
+### Doctores Agregados
+6. **Dr. Roberto Silva** - Neurología (€90.00)
+7. **Dr. Patricia Morales** - Psicología (€65.00)
+8. **Dr. Javier Ruiz** - Oftalmología (€75.00)
+9. **Dr. Isabel Vargas** - Endocrinología (€80.00)
+10. **Dr. Manuel Torres** - Urología (€85.00)
+
+**Credenciales de acceso para todos los doctores:**
+- **Contraseña:** `admin123`
+
 ## 🚀 Funcionalidades Principales
 
 ### Para Pacientes
 - ✅ Registro y login seguro
 - ✅ Buscar doctores por especialidad
-- ✅ Programar citas médicas
+- ✅ Programar citas médicas desde la vista de doctores
 - ✅ Ver historial médico personal
 - ✅ Recibir notificaciones por email
 - ✅ Gestionar perfil personal
+- ✅ Ver citas programadas y pasadas
 
 ### Para Doctores
 - ✅ Registro con validación de licencia
@@ -204,23 +226,42 @@ NODE_ENV=development
 ## 📊 Características Técnicas
 
 ### Seguridad
-- ✅ Autenticación JWT
+- ✅ Autenticación JWT con interceptores automáticos
 - ✅ Encriptación de contraseñas (bcrypt)
 - ✅ Validación de datos en frontend y backend
 - ✅ Rate limiting para APIs
 - ✅ Headers de seguridad (Helmet)
+- ✅ Manejo automático de tokens expirados
 
 ### Rendimiento
 - ✅ Índices optimizados en BD
 - ✅ Paginación en consultas
 - ✅ Caché de consultas frecuentes
 - ✅ Compresión de respuestas
+- ✅ Configuración centralizada de Axios
 
 ### Escalabilidad
 - ✅ Arquitectura modular
 - ✅ Separación de responsabilidades
 - ✅ APIs RESTful
 - ✅ Contenedores Docker
+
+## 🐛 Correcciones Recientes
+
+### Problemas Solucionados
+- ✅ **Error de puertos ocupados**: Implementado manejo automático
+- ✅ **Error de autenticación**: Corregido middleware JWT (`decoded.userId` → `decoded.id`)
+- ✅ **Error de carga de doctores**: Removido requerimiento de autenticación para endpoint público
+- ✅ **Loop de redirección**: Corregida lógica de rutas protegidas
+- ✅ **Alertas innecesarias**: Eliminadas alertas de error cuando no hay citas
+- ✅ **Configuración de Axios**: Centralizada con interceptores automáticos
+
+### Mejoras Implementadas
+- ✅ **10 doctores** con diferentes especialidades
+- ✅ **Eliminación del botón "Nueva Cita"** de la vista de citas
+- ✅ **Creación de citas** solo desde la vista de doctores
+- ✅ **Manejo mejorado de errores** en frontend y backend
+- ✅ **Logs de debug** para facilitar troubleshooting
 
 ## 🧪 Testing
 
@@ -242,15 +283,17 @@ cd frontend && npm test
 - `PUT /api/auth/change-password` - Cambiar contraseña
 
 ### Citas
-- `GET /api/appointments` - Listar citas
+- `GET /api/appointments` - Listar citas del usuario
 - `POST /api/appointments` - Crear cita
 - `PUT /api/appointments/:id` - Actualizar cita
 - `DELETE /api/appointments/:id` - Cancelar cita
+- `GET /api/appointments/stats/overview` - Estadísticas de citas
 
 ### Doctores
-- `GET /api/doctors` - Listar doctores
-- `GET /api/doctors/:id` - Obtener doctor
+- `GET /api/doctors` - Listar doctores (público)
+- `GET /api/doctors/:id` - Obtener doctor específico
 - `PUT /api/doctors/:id` - Actualizar doctor
+- `GET /api/doctors/:id/availability` - Horarios disponibles
 
 ### Pacientes
 - `GET /api/patients/history` - Historial médico
@@ -270,7 +313,7 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 👥 Autores
 
-- **Tu Nombre** - *Desarrollo inicial* - [TuUsuario](https://github.com/TuUsuario)
+- **Alfredo Mejia** - *Desarrollo inicial* - [AlfredoMejia3001](https://github.com/AlfredoMejia3001)
 
 ## 🙏 Agradecimientos
 
@@ -283,8 +326,10 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 🚀 Estado del Proyecto
 
-✅ **Completado**: Sistema básico funcional
-🔄 **En desarrollo**: Mejoras de UI/UX
-📋 **Pendiente**: Tests unitarios y de integración
+✅ **Completado**: Sistema básico funcional con 10 doctores
+✅ **Completado**: Corrección de errores de autenticación y carga
+✅ **Completado**: Mejoras en UX (eliminación de botón innecesario)
+🔄 **En desarrollo**: Tests unitarios y de integración
+📋 **Pendiente**: Documentación de API completa
 
 **Última actualización**: 5 de Agosto 2025 
