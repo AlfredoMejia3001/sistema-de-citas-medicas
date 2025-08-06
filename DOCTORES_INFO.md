@@ -11,45 +11,45 @@
 - **Email:** maria.gonzalez@medical.com
 - **Especialidad:** Cardiología
 - **Cédula:** CARD001
-- **Teléfono:** +34 600 123 456
-- **Dirección:** Calle Mayor 123, Madrid
-- **Honorarios:** €80.00
+- **Teléfono:** +52 55 1234 5678
+- **Dirección:** Av. Insurgentes Sur 123, CDMX
+- **Honorarios:** $1,600.00 MXN
 - **Horarios:** 09:00, 10:00, 11:00, 12:00, 16:00, 17:00, 18:00
 
 ### 2. Dr. Carlos Rodríguez
 - **Email:** carlos.rodriguez@medical.com
 - **Especialidad:** Dermatología
 - **Cédula:** DERM001
-- **Teléfono:** +34 600 234 567
-- **Dirección:** Avenida Principal 456, Barcelona
-- **Honorarios:** €70.00
+- **Teléfono:** +52 55 2345 6789
+- **Dirección:** Av. Reforma 456, CDMX
+- **Honorarios:** $1,400.00 MXN
 - **Horarios:** 09:00, 10:00, 11:00, 12:00, 15:00, 16:00, 17:00
 
 ### 3. Dr. Ana Martínez
 - **Email:** ana.martinez@medical.com
 - **Especialidad:** Pediatría
 - **Cédula:** PEDI001
-- **Teléfono:** +34 600 345 678
-- **Dirección:** Plaza Central 789, Valencia
-- **Honorarios:** €60.00
+- **Teléfono:** +52 55 3456 7890
+- **Dirección:** Plaza Mayor 789, CDMX
+- **Honorarios:** $1,200.00 MXN
 - **Horarios:** 08:00, 09:00, 10:00, 11:00, 15:00, 16:00, 17:00
 
 ### 4. Dr. Luis Fernández
 - **Email:** luis.fernandez@medical.com
 - **Especialidad:** Ortopedia
 - **Cédula:** ORTO001
-- **Teléfono:** +34 600 456 789
-- **Dirección:** Calle San Martín 321, Sevilla
-- **Honorarios:** €75.00
+- **Teléfono:** +52 55 4567 8901
+- **Dirección:** Calle Juárez 321, CDMX
+- **Honorarios:** $1,500.00 MXN
 - **Horarios:** 08:00, 09:00, 10:00, 11:00, 16:00, 17:00, 18:00
 
 ### 5. Dr. Carmen López
 - **Email:** carmen.lopez@medical.com
 - **Especialidad:** Ginecología
 - **Cédula:** GINE001
-- **Teléfono:** +34 600 567 890
-- **Dirección:** Avenida de la Paz 654, Bilbao
-- **Honorarios:** €85.00
+- **Teléfono:** +52 55 5678 9012
+- **Dirección:** Av. Chapultepec 654, CDMX
+- **Honorarios:** $1,700.00 MXN
 - **Horarios:** 09:00, 10:00, 11:00, 12:00, 15:00, 16:00, 17:00
 
 ---
@@ -60,45 +60,45 @@
 - **Email:** roberto.silva@medical.com
 - **Especialidad:** Neurología
 - **Cédula:** NEUR001
-- **Teléfono:** +34 600 678 901
-- **Dirección:** Calle del Sol 147, Málaga
-- **Honorarios:** €90.00
+- **Teléfono:** +52 55 6789 0123
+- **Dirección:** Calle Hidalgo 147, CDMX
+- **Honorarios:** $1,800.00 MXN
 - **Horarios:** 08:00, 09:00, 10:00, 11:00, 15:00, 16:00, 17:00
 
 ### 7. Dr. Patricia Morales
 - **Email:** patricia.morales@medical.com
 - **Especialidad:** Psicología
 - **Cédula:** PSIC001
-- **Teléfono:** +34 600 789 012
-- **Dirección:** Avenida de la Libertad 258, Zaragoza
-- **Honorarios:** €65.00
+- **Teléfono:** +52 55 7890 1234
+- **Dirección:** Av. de los Constituyentes 258, CDMX
+- **Honorarios:** $1,300.00 MXN
 - **Horarios:** 09:00, 10:00, 11:00, 12:00, 16:00, 17:00, 18:00
 
 ### 8. Dr. Javier Ruiz
 - **Email:** javier.ruiz@medical.com
 - **Especialidad:** Oftalmología
 - **Cédula:** OFT001
-- **Teléfono:** +34 600 890 123
-- **Dirección:** Plaza de España 369, Granada
-- **Honorarios:** €75.00
+- **Teléfono:** +52 55 8901 2345
+- **Dirección:** Plaza de la República 369, CDMX
+- **Honorarios:** $1,500.00 MXN
 - **Horarios:** 08:00, 09:00, 10:00, 11:00, 15:00, 16:00, 17:00
 
 ### 9. Dr. Isabel Vargas
 - **Email:** isabel.vargas@medical.com
 - **Especialidad:** Endocrinología
 - **Cédula:** ENDO001
-- **Teléfono:** +34 600 901 234
-- **Dirección:** Calle Real 741, Córdoba
-- **Honorarios:** €80.00
+- **Teléfono:** +52 55 9012 3456
+- **Dirección:** Calle Real 741, CDMX
+- **Honorarios:** $1,600.00 MXN
 - **Horarios:** 09:00, 10:00, 11:00, 12:00, 16:00, 17:00, 18:00
 
 ### 10. Dr. Manuel Torres
 - **Email:** manuel.torres@medical.com
 - **Especialidad:** Urología
 - **Cédula:** URO001
-- **Teléfono:** +34 600 012 345
-- **Dirección:** Avenida de la Constitución 852, Alicante
-- **Honorarios:** €85.00
+- **Teléfono:** +52 55 0123 4567
+- **Dirección:** Av. de la Constitución 852, CDMX
+- **Honorarios:** $1,700.00 MXN
 - **Horarios:** 08:00, 09:00, 10:00, 11:00, 15:00, 16:00, 17:00
 
 ---
@@ -133,9 +133,9 @@
 
 - **Total de doctores:** 10
 - **Especialidades únicas:** 10
-- **Rango de honorarios:** €60.00 - €90.00
+- **Rango de honorarios:** $1,200.00 - $1,800.00 MXN
 - **Horarios disponibles:** Mañana y tarde
-- **Ubicaciones:** 10 ciudades diferentes en España
+- **Ubicaciones:** Todas en Ciudad de México
 
 ---
 

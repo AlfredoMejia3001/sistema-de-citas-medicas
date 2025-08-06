@@ -65,18 +65,18 @@ Este sistema permite la gestión integral de citas médicas entre pacientes y do
 El sistema incluye **10 doctores** con diferentes especialidades:
 
 ### Doctores Originales
-1. **Dr. María González** - Cardiología (€80.00)
-2. **Dr. Carlos Rodríguez** - Dermatología (€70.00)
-3. **Dr. Ana Martínez** - Pediatría (€60.00)
-4. **Dr. Luis Fernández** - Ortopedia (€75.00)
-5. **Dr. Carmen López** - Ginecología (€85.00)
+1. **Dr. María González** - Cardiología ($1,600.00 MXN)
+2. **Dr. Carlos Rodríguez** - Dermatología ($1,400.00 MXN)
+3. **Dr. Ana Martínez** - Pediatría ($1,200.00 MXN)
+4. **Dr. Luis Fernández** - Ortopedia ($1,500.00 MXN)
+5. **Dr. Carmen López** - Ginecología ($1,700.00 MXN)
 
 ### Doctores Agregados
-6. **Dr. Roberto Silva** - Neurología (€90.00)
-7. **Dr. Patricia Morales** - Psicología (€65.00)
-8. **Dr. Javier Ruiz** - Oftalmología (€75.00)
-9. **Dr. Isabel Vargas** - Endocrinología (€80.00)
-10. **Dr. Manuel Torres** - Urología (€85.00)
+6. **Dr. Roberto Silva** - Neurología ($1,800.00 MXN)
+7. **Dr. Patricia Morales** - Psicología ($1,300.00 MXN)
+8. **Dr. Javier Ruiz** - Oftalmología ($1,500.00 MXN)
+9. **Dr. Isabel Vargas** - Endocrinología ($1,600.00 MXN)
+10. **Dr. Manuel Torres** - Urología ($1,700.00 MXN)
 
 **Credenciales de acceso para todos los doctores:**
 - **Contraseña:** `admin123`

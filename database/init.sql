@@ -22,16 +22,16 @@ ON CONFLICT (email) DO NOTHING;
 
 -- Insertar perfiles de doctores
 INSERT INTO doctors (user_id, specialty, license_number, phone, address, consultation_fee, available_hours) VALUES 
-((SELECT id FROM users WHERE email = 'maria.gonzalez@medical.com'), 'Cardiología', 'CARD001', '+34 600 123 456', 'Calle Mayor 123, Madrid', 80.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
-((SELECT id FROM users WHERE email = 'carlos.rodriguez@medical.com'), 'Dermatología', 'DERM001', '+34 600 234 567', 'Avenida Principal 456, Barcelona', 70.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]'),
-((SELECT id FROM users WHERE email = 'ana.martinez@medical.com'), 'Pediatría', 'PEDI001', '+34 600 345 678', 'Plaza Central 789, Valencia', 60.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
-((SELECT id FROM users WHERE email = 'luis.fernandez@medical.com'), 'Ortopedia', 'ORTO001', '+34 600 456 789', 'Calle San Martín 321, Sevilla', 75.00, '["08:00", "09:00", "10:00", "11:00", "16:00", "17:00", "18:00"]'),
-((SELECT id FROM users WHERE email = 'carmen.lopez@medical.com'), 'Ginecología', 'GINE001', '+34 600 567 890', 'Avenida de la Paz 654, Bilbao', 85.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]'),
-((SELECT id FROM users WHERE email = 'roberto.silva@medical.com'), 'Neurología', 'NEUR001', '+34 600 678 901', 'Calle del Sol 147, Málaga', 90.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
-((SELECT id FROM users WHERE email = 'patricia.morales@medical.com'), 'Psicología', 'PSIC001', '+34 600 789 012', 'Avenida de la Libertad 258, Zaragoza', 65.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
-((SELECT id FROM users WHERE email = 'javier.ruiz@medical.com'), 'Oftalmología', 'OFT001', '+34 600 890 123', 'Plaza de España 369, Granada', 75.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
-((SELECT id FROM users WHERE email = 'isabel.vargas@medical.com'), 'Endocrinología', 'ENDO001', '+34 600 901 234', 'Calle Real 741, Córdoba', 80.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
-((SELECT id FROM users WHERE email = 'manuel.torres@medical.com'), 'Urología', 'URO001', '+34 600 012 345', 'Avenida de la Constitución 852, Alicante', 85.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]')
+((SELECT id FROM users WHERE email = 'maria.gonzalez@medical.com'), 'Cardiología', 'CARD001', '+52 55 1234 5678', 'Av. Insurgentes Sur 123, CDMX', 1600.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
+((SELECT id FROM users WHERE email = 'carlos.rodriguez@medical.com'), 'Dermatología', 'DERM001', '+52 55 2345 6789', 'Av. Reforma 456, CDMX', 1400.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'ana.martinez@medical.com'), 'Pediatría', 'PEDI001', '+52 55 3456 7890', 'Plaza Mayor 789, CDMX', 1200.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'luis.fernandez@medical.com'), 'Ortopedia', 'ORTO001', '+52 55 4567 8901', 'Calle Juárez 321, CDMX', 1500.00, '["08:00", "09:00", "10:00", "11:00", "16:00", "17:00", "18:00"]'),
+((SELECT id FROM users WHERE email = 'carmen.lopez@medical.com'), 'Ginecología', 'GINE001', '+52 55 5678 9012', 'Av. Chapultepec 654, CDMX', 1700.00, '["09:00", "10:00", "11:00", "12:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'roberto.silva@medical.com'), 'Neurología', 'NEUR001', '+52 55 6789 0123', 'Calle Hidalgo 147, CDMX', 1800.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'patricia.morales@medical.com'), 'Psicología', 'PSIC001', '+52 55 7890 1234', 'Av. de los Constituyentes 258, CDMX', 1300.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
+((SELECT id FROM users WHERE email = 'javier.ruiz@medical.com'), 'Oftalmología', 'OFT001', '+52 55 8901 2345', 'Plaza de la República 369, CDMX', 1500.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]'),
+((SELECT id FROM users WHERE email = 'isabel.vargas@medical.com'), 'Endocrinología', 'ENDO001', '+52 55 9012 3456', 'Calle Real 741, CDMX', 1600.00, '["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]'),
+((SELECT id FROM users WHERE email = 'manuel.torres@medical.com'), 'Urología', 'URO001', '+52 55 0123 4567', 'Av. de la Constitución 852, CDMX', 1700.00, '["08:00", "09:00", "10:00", "11:00", "15:00", "16:00", "17:00"]')
 ON CONFLICT (user_id) DO NOTHING;
 
 -- Insertar pacientes de ejemplo
