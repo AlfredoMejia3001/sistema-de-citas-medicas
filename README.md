@@ -116,7 +116,7 @@ El sistema incluye **10 doctores** con diferentes especialidades:
 ### Instalación Rápida
 ```bash
 # Clonar el repositorio
-git clone <repository-url>
+git clone https://github.com/AlfredoMejia3001/sistema-de-citas-medicas.git
 cd sistema-de-citas-medicas
 
 # Configurar todo automáticamente
@@ -326,10 +326,10 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 🚀 Estado del Proyecto
 
-✅ **Completado**: Sistema básico funcional con 10 doctores
-✅ **Completado**: Corrección de errores de autenticación y carga
-✅ **Completado**: Mejoras en UX (eliminación de botón innecesario)
-🔄 **En desarrollo**: Tests unitarios y de integración
-📋 **Pendiente**: Documentación de API completa
+- ✅ **Completado**: Sistema básico funcional con 10 doctores
+- ✅ **Completado**: Corrección de errores de autenticación y carga
+- ✅ **Completado**: Mejoras en UX (eliminación de botón innecesario)
+- 🔄 **En desarrollo**: Tests unitarios y de integración
+- 📋 **Pendiente**: Documentación de API completa
 
 **Última actualización**: 5 de Agosto 2025 
