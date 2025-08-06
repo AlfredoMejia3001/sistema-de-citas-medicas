@@ -287,4 +287,4 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 🔄 **En desarrollo**: Mejoras de UI/UX
 📋 **Pendiente**: Tests unitarios y de integración
 
-**Última actualización**: Agosto 2024 
+**Última actualización**: 5 de Agosto 2025 
