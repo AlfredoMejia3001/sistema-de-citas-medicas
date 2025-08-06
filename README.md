@@ -1,5 +1,7 @@
 # 🏥 Sistema de Citas Médicas
 
+> ⚠️ **ADVERTENCIA**: Este proyecto está en fase **PRE-ALPHA**. Solo las funcionalidades básicas de pacientes están operativas. No está listo para uso en producción.
+
 Un sistema completo de gestión de citas médicas desarrollado con **React** (frontend) y **Node.js** (backend), con base de datos **PostgreSQL** y contenedores **Docker**.
 
 ## 📋 Descripción
@@ -107,6 +109,8 @@ El sistema incluye **10 doctores** con diferentes especialidades:
 - ✅ Configuración del sistema
 
 ## 🛠️ Instalación y Configuración
+
+> ⚠️ **Nota**: Este es un proyecto en desarrollo. Solo las funcionalidades básicas de pacientes están operativas. Los roles de doctores y administradores no están completamente implementados.
 
 ### Prerrequisitos
 - Node.js (v16 o superior)
@@ -326,10 +330,57 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 
 ## 🚀 Estado del Proyecto
 
-- ✅ **Completado**: Sistema básico funcional con 10 doctores
-- ✅ **Completado**: Corrección de errores de autenticación y carga
-- ✅ **Completado**: Mejoras en UX (eliminación de botón innecesario)
-- 🔄 **En desarrollo**: Tests unitarios y de integración
-- 📋 **Pendiente**: Documentación de API completa
+### ⚠️ **IMPORTANTE: Fase Pre-Alpha**
+
+**Este proyecto se encuentra actualmente en fase PRE-ALPHA**, lo que significa que:
+
+- 🔴 **Muchas funcionalidades aún fallan o no están implementadas**
+- 🔴 **Solo las funcionalidades básicas de pacientes están operativas**
+- 🔴 **Los roles de doctores y administradores NO están completamente desarrollados**
+- 🔴 **El sistema no está listo para uso en producción**
+- 🔴 **Pueden ocurrir errores inesperados y pérdida de datos**
+
+### ✅ **Funcionalidades Operativas (Pacientes)**
+
+- ✅ **Registro y login** de pacientes
+- ✅ **Ver lista de doctores** disponibles
+- ✅ **Agendar citas** con doctores
+- ✅ **Ver citas programadas** y pasadas
+- ✅ **Navegación básica** en la aplicación
+
+### 🔴 **Funcionalidades NO Implementadas**
+
+- ❌ **Panel de doctores** (login, gestión de citas, historiales)
+- ❌ **Panel de administradores** (gestión de usuarios, reportes)
+- ❌ **Gestión de historiales médicos** completos
+- ❌ **Sistema de notificaciones** por email
+- ❌ **Subida de documentos** médicos
+- ❌ **Tests unitarios** y de integración
+- ❌ **Validaciones** avanzadas de datos
+- ❌ **Sistema de pagos** y facturación
+- ❌ **Reportes** y estadísticas
+- ❌ **Configuración** avanzada del sistema
+
+### 🔄 **En Desarrollo**
+
+- 🔄 **Corrección de errores** de autenticación y carga
+- 🔄 **Mejoras en UX** (eliminación de botón innecesario)
+- 🔄 **Configuración de precios** en pesos mexicanos
+- 🔄 **Documentación** del proyecto
+
+### 📋 **Pendiente**
+
+- 📋 **Implementación completa** de roles de doctores
+- 📋 **Implementación completa** de panel de administradores
+- 📋 **Tests unitarios** y de integración
+- 📋 **Documentación de API** completa
+- 📋 **Sistema de notificaciones** por email
+- 📋 **Gestión de documentos** médicos
+- 📋 **Reportes** y estadísticas
+- 📋 **Sistema de pagos** y facturación
+
+### 🎯 **Objetivo Actual**
+
+Este proyecto es principalmente una **demostración técnica** y un **prototipo funcional** para mostrar las capacidades básicas del sistema. No está diseñado para uso en producción hasta que se complete la fase de desarrollo.
 
 **Última actualización**: 5 de Agosto 2025 
